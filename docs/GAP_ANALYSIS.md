@@ -117,8 +117,8 @@
 | Issue | Fix | Phase |
 |-------|-----|-------|
 | `TZ=Asia/Shanghai` in compose files | → `Asia/Dhaka` (**done**) | 0 |
-| Plaintext `"baidu ai cloud"` credential file | → secrets manager / env | 0 |
-| Plaintext `.admin-credentials` | → secrets manager | 0 |
+| Plaintext `"baidu ai cloud"` credential file | age-encrypted at `secrets/baidu-ai-cloud.age`; plaintext shredded | 0 |
+| Plaintext `.admin-credentials` | age-encrypted at `secrets/admin-credentials.age`; plaintext shredded | 0 |
 | SQLite in production | → PostgreSQL | 1 |
 | `SESSION_COOKIE_SECURE` off | → true in prod | 2 |
 | `baidu_v2` channel name `"volcengine"` | → `"baidu_v2"` (**done**) | 0 |

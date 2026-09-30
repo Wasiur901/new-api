@@ -162,15 +162,20 @@ SSLCOMMERZ reconciliation exists — these are net-new per the directive.
 ## 12. Configuration / secret hygiene (findings to fix)
 
 - `.env` in `~/Work/new-api` contains `SESSION_SECRET`, `PORT`, `SQLITE_PATH`,
-  `TZ=Asia/Shanghai` — TZ must become `Asia/Dhaka` for the business timezone
-  (**reconciled**: both `docker-compose.yml` and `docker-compose.dev.yml` now set
-  `TZ=Asia/Dhaka`). The running instance's `.env` still carries the old value until
-  it is re-provisioned.
-- `.admin-credentials` stores admin username/password in plaintext.
-- A file named `"baidu ai cloud"` under `~/Work` contains a **plaintext Baidu API
-  credential** (`bce-v3/ALTAK-…/…`). This is outside git but represents a
-  secret-handling risk that must be migrated to a secrets manager / env before any
-  production work.
+  `TZ` — TZ must be `Asia/Dhaka` for the business timezone (**reconciled**: both
+  `docker-compose.yml` and `docker-compose.dev.yml` now set `TZ=Asia/Dhaka`, and the
+  running instance's `.env` has been updated to `TZ=Asia/Dhaka`).
+- ~~`.admin-credentials` stores admin username/password in plaintext.~~ **Migrated**:
+  now age-encrypted at `~/Work/new-api/secrets/admin-credentials.age`; plaintext
+  shredded.
+- ~~A file named `"baidu ai cloud"` under `~/Work` contains a plaintext Baidu API
+  credential (`bce-v3/ALTAK-…/…`).~~ **Migrated**: now age-encrypted at
+  `~/Work/new-api/secrets/baidu-ai-cloud.age`; plaintext shredded.
+- Secret tooling: `age` v1.3.2 installed to `~/go/bin/age` (and `age-keygen`), with a
+  private key at `~/.config/age/keys.txt` (mode 0600). Decrypt helper +
+  layout notes at `~/Work/new-api/secrets/`. `SESSION_SECRET` in `.env` remains
+  plaintext and is the next item to migrate to a real secrets manager before
+  production.
 - GitHub `GITHUB_TOKEN` is **not set** in this environment (no push/PR automation
   possible right now; Docker, Go 1.27, Node 26, Bun 1.4.2 are available).
 
