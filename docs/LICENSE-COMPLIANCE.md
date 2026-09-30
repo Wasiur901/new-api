@@ -12,8 +12,8 @@
 | Source | https://github.com/QuantumNous/new-api |
 | Module | `github.com/QuantumNous/new-api` |
 | License | **GNU Affero General Public License v3.0 (AGPL-3.0)** |
-| Pinned version (this repo) | `v1.0.0-rc.36` |
-| Latest upstream (at last check) | `v1.0.0-rc.40` |
+| Pinned version (this repo) | `v1.0.0-rc.41` |
+| Latest upstream (at last check) | `v1.0.0-rc.41` (== `origin/main`, commit `2035a82ae`) |
 | License file | `LICENSE` (verbatim AGPL-3.0 text) |
 | Attribution file | `NOTICE` |
 
@@ -36,9 +36,11 @@ must **not misrepresent origin**.
       (Docker image, standalone binary, frontend bundle, Electron installer).
 - [x] Keep `LICENSE` intact.
 - [x] Keep `THIRD-PARTY-LICENSES.md` intact and shipped.
-- [ ] Preserve the attribution string and visible upstream link in the branded UI
-      (do **not** strip attribution during re-branding).
-- [ ] Mark modified files/features clearly (see §4 "Modifications log").
+- [x] Preserve the attribution string and visible upstream link in the branded UI
+      (verified: `web/src/components/layout/components/footer.tsx` —
+      `ProjectAttribution` component still renders "New API" link to
+      `https://github.com/QuantumNous/new-api` + the §7(b) attribution string).
+- [x] Mark modified files/features clearly (see §4 "Modifications log").
 
 ## 3. AGPL implications (what we must understand, not conclude)
 
@@ -61,9 +63,10 @@ obligations we must be prepared to satisfy:
 
 | Date | Area | Description |
 |------|------|-------------|
-| (to date) | `web/` | Frontend re-branding: logos, fonts (Gabarito/Bungee), theme colors, removal of Docs nav module. Uncommitted until finalized. |
-| (to date) | `relay/channel/baidu_v2/constants.go` | Fix `ChannelName` `"volcengine"` → `"baidu_v2"` (bug in upstream copy). |
-| (to date) | `docs/` | Added Phase 0 discovery/plan/compliance docs (new files, additive). |
+| (2026-09-30) | `web/` | Frontend re-branding ("LOOP"): logos, fonts (Gabarito/Bungee), theme colors, `<title>LOOP</title>`, favicon. Committed on `loop-rebrand-baidu-fix`. |
+| (2026-09-30) | `relay/channel/baidu_v2/constants.go` | Fix `ChannelName` `"volcengine"` -> `"baidu_v2"` (bug in upstream copy, still unfixed upstream at rc.41). |
+| (2026-09-30) | `docker-compose*.yml` | Set `TZ=Asia/Dhaka` for the business timezone. |
+| (2026-09-30) | `docs/` | Added Phase 0 discovery/plan/compliance docs + ADR-0001/0002 (new/editorial, additive). |
 
 ## 5. Third-party dependencies
 

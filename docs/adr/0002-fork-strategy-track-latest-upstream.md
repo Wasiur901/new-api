@@ -1,6 +1,6 @@
 # ADR-0002: Adopt upstream v1.0.0-rc.41 (latest), not pin rc.36
 
-- Status: proposed (operator to confirm)
+- Status: Accepted (rebase completed 2026-09-30)
 - Date: 2026-09-30
 
 ## Context

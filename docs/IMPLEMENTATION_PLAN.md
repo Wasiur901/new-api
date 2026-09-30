@@ -24,7 +24,7 @@
 - [x] First ADR (`docs/adr/0001-extend-do-not-rewrite-new-api.md`) ✅
 - [x] `.agents/agents/` (12 specialized agents) + `.agents/skills/` (10 project skills) ✅
 - [x] Hygiene: `TZ=Asia/Dhaka` in both compose files ✅; `baidu_v2` `ChannelName` fix (`"volcengine"` → `"baidu_v2"`) ✅
-- [ ] Hygiene (open): move plaintext Baidu credential out of `~/Work/"baidu ai cloud"`; commit branding to a feature branch; decide fork strategy (rebase onto rc.40?).
+- [x] Hygiene (done): plaintext Baidu credential moved to age-encrypted secret (`~/Work/new-api/secrets/`); branding committed to `loop-rebrand-baidu-fix`; fork rebased onto `v1.0.0-rc.41` (ADR-0002); running instance rebuilt & synced to rc.41.
 
 **Acceptance**: docs approved by operator; secrets not in plaintext; TZ corrected.
 
@@ -110,11 +110,8 @@ no LLM-fabricated numbers (UNRECONCILED labels where data missing).
 
 ## Near-term next actions (after operator confirms Phase 0 outputs)
 
-1. Confirm fork strategy: rebase the fork onto upstream `v1.0.0-rc.40` before any
-   new code (we are 4 RCs behind), or pin rc.36 deliberately and document why.
-2. Commit existing branding changes to a feature branch with attribution preserved
-   (NOTICE §7) and an ADR.
-3. Move the plaintext Baidu credential to a secret store/env; set `TZ=Asia/Dhaka`.
-4. Rebuild the backend binary so `web/dist` (with the rebrand) is embedded, and
-   restart/sync the running instance (`/home/wasi/Work/new-api`, port 3000).
+1. ~~Confirm fork strategy~~ — **Done**: rebased onto `v1.0.0-rc.41` (ADR-0002).
+2. ~~Commit branding to a feature branch~~ — **Done**: `loop-rebrand-baidu-fix`, attribution preserved (NOTICE §7).
+3. ~~Move plaintext Baidu credential; set TZ~~ — **Done**: age-encrypted `secrets/`, `TZ=Asia/Dhaka`.
+4. ~~Rebuild binary and sync running instance~~ — **Done**: rc.41 build running on port 3000 (systemd `new-api`).
 5. Scaffold `/control-plane`, `/portal`, `/infra`, `/automations`, CI, then Phase 1.

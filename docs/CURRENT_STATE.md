@@ -9,7 +9,7 @@ Two related directories exist under `~/Work`:
 
 | Path | What it is |
 |------|------------|
-| `~/Work/new-api-fork` | Git checkout of upstream `QuantumNous/new-api`, pinned to tag `v1.0.0-rc.36`, with **uncommitted** frontend branding changes. |
+| `~/Work/new-api-fork` | Git checkout of upstream `QuantumNous/new-api`, rebased onto tag `v1.0.0-rc.41`, with 5 local patches (timezone, LOOP rebrand, baidu_v2 fix, docs). |
 | `~/Work/new-api` | A *deployed instance*: a compiled 155 MB binary plus runtime data (`.env`, `.admin-credentials`, SQLite DB, logs). **Not a git repository.** |
 
 There is **no** top-level "platform" repository yet — no `/control-plane`, `/portal`,
@@ -21,10 +21,9 @@ JIT, etc.) are out of scope for this directive.
 
 ## 2. Upstream New API version
 
-- Local fork is pinned at tag **`v1.0.0-rc.36`** (commit `ea7cb0b`).
-- The clone is **shallow / grafted** (single commit, `git log` shows only one entry).
-- Latest upstream release on GitHub is **`v1.0.0-rc.40`** (published 2026-09-21).
-  → The fork is **4 release candidates behind** upstream.
+- Local fork is rebased onto tag **`v1.0.0-rc.41`** (commit `2035a82ae`, 2026-09-30) — the same commit as `origin/main`.
+- 5 local patches carried on top (branch `loop-rebrand-baidu-fix`, HEAD `16c694118`):
+  timezone (Asia/Dhaka), LOOP web rebrand, baidu_v2 ChannelName fix, Phase 0 docs, secret-migration docs.
 - Module path: `github.com/QuantumNous/new-api`, `go 1.25.1`.
 
 ## 3. Modifications already made (uncommitted)
@@ -56,7 +55,7 @@ comment `/* Brand display face (LOOP / dhaka-threads) for primary page titles. *
 `web/src/styles/index.css`. The `<title>` and default system name still read
 "New API".
 
-The Go backend carries **one** uncommitted change from upstream `v1.0.0-rc.36`:
+The Go backend carries **one** local patch from upstream `v1.0.0-rc.41`:
 
 ```diff
 -relay/channel/baidu_v2/constants.go: var ChannelName = "volcengine"
@@ -187,9 +186,10 @@ SSLCOMMERZ reconciliation exists — these are net-new per the directive.
 
 ## 14. Summary
 
-The repository is **upstream New API v1.0.0-rc.36 with partial frontend re-branding
-and one backend fix (the `baidu_v2` channel name)**, running as an unconfigured
-SQLite-backed standalone binary. None of the directive's control-plane, portal,
+The repository is **upstream New API v1.0.0-rc.41 with LOOP web re-branding
+and one backend fix (the `baidu_v2` channel name)**, running as a SQLite-backed
+standalone binary (`~/Work/new-api`, systemd user unit `new-api`). None of the
+directive's control-plane, portal,
 finance, SSLCOMMERZ, or Baidu-reconciliation components exist yet. Phase 1
 scaffolding has not begun. Phase 0 discovery documentation, the initial ADR, and the
 12 agent + 10 project-skill definitions are in place.
