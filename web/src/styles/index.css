@@ -19,13 +19,8 @@ For commercial licensing, please contact support@quantumnous.com
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/public-sans';
-/* Editorial serif (Lora) backing the `serif` font axis and the Anthropic
- * preset's default typography. See `--font-serif` in theme.css for the
- * full Latin + CJK fallback stack and `theme-presets.css` for the cascade
- * that activates it. Loaded globally so font-switching is instantaneous
- * with no FOUT once the variable is fetched. */
-@import '@fontsource-variable/lora';
+@import '@fontsource-variable/gabarito';
+@import '@fontsource/bungee';
 
 @import './theme.css';
 @import './theme-presets.css';
@@ -115,6 +110,13 @@ For commercial licensing, please contact support@quantumnous.com
      * (defined in theme.css, swapped by `[data-theme-font='...']` blocks
      * in theme-presets.css). Defaults to the project's humanist sans. */
     font-family: var(--font-body);
+  }
+
+  /* Brand display face (LOOP / dhaka-threads) for primary page titles. */
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 
   /* Keep sticky headers stable while primitives lock body scrolling. */
